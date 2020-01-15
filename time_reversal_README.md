@@ -2,6 +2,7 @@
 Time reversal related code 
 
 Forward-time e-machine is M+ with statistical complexity Cmu+
+
 Reverse-time e-machine is M- with statistical complexity Cmu-
 
 # Causal irreversibility Xi
