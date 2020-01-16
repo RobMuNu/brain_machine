@@ -10,7 +10,7 @@ defined as Xi = Cmu+ - Cmu-
 
 Reverse time M- is taken by flipping the time series data and running CSSR on that instead. 
 
-P.S. if you do anything extra to the data (like do time skipping or downsampling, or end up with more multiline-data) make sure the data is flipped while preserving the ‘formation’ between forward and reverse time data. It is person preference but IMO easier to align the state series this way for crypticity and bidirectional stuff later
+P.S. if you using multiline-data make sure the data is flipped while preserving the lines between forward and reverse time data. It is person preference but IMO easier to align the state series this way for crypticity and bidirectional stuff later
 
 e.g.
 
@@ -23,8 +23,11 @@ line 2: 0 0 1
 line 3: 0 0 0
 
 reversed time should be:
+
 line 1: 1 1 0
+
 line 2: 1 0 0
+
 line 3: 0 0 0
 
 
@@ -57,10 +60,10 @@ This was also written for a single time series output, not multi-line data. You 
   2. Align the forward time and reverse time state series. This means flipping the reverse time state series (so left to right is "forward in time" again), then lining up the forward and reverse states at each time step. 'align_state_series.m' does this (again for single line 18000 long state series). Make sure each individual line is aligning the states correctly when changing to multi-line.
   
   3. bidirectional Cmu^{+-} and crypticity: The aligned state series gives you the state series of the bidirectional machine. e.g. for forward causal states A and B, and reverse states X, Y and Z, the possible bidirectional states are (A,X),(A,Y),(A,Z),(B,X),(B,Y),(B,Z).  
-From this aligned state series you can calculate the entropy of the bi-directional states: this is the bidirectional statistical complexity Cmu^{+-}. Just count the bidirectional states as they appear and divide by total number of state counts to approximate the stationary distribution of bidirectional states (and use that to calculate Cmu^{+-}). I do this in fly data in '.m'.
+From this aligned state series you can calculate the entropy of the bi-directional states: this is the bidirectional statistical complexity Cmu^{+-}. Just count the bidirectional states as they appear and divide by total number of state counts to approximate the stationary distribution of bidirectional states (and use that to calculate Cmu^{+-}). I do this in fly data (and more) in 'do_bistate_counts_and_transitions.m'.
 
 Crypticity 'd' is then calculated by d := 2*Cmu^{+-} - Cmu+ - Cmu-
 
-  4. Bidirectional machine itself: If you want the machine itself, not just Cmu+-, you need to infer the transition probabilities from the state series. I do this for fly data in 'do_bistate_counts_and_transitions.m'
+  4. Bidirectional machine itself: If you want the machine itself, not just Cmu+-, you need to infer the transition probabilities from the state series. I do this for fly data in 'do_bistate_counts_and_transitions.m'.
   
   5. Write a .dot file using the bidirectional state transitions (if you want to view it). For fly data 'write_all3machine_dotfile.m' writes that information for forward, reverse and bidirectional machines together in one .dot file.
