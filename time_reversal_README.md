@@ -13,10 +13,20 @@ Reverse time M- is taken by flipping the time series data and running CSSR on th
 P.S. if you do anything extra to the data (like do time skipping or downsampling, or end up with more multiline-data) make sure the data is flipped while preserving the ‘formation’ between forward and reverse time data. It is person preference but IMO easier to align the state series this way for crypticity and bidirectional stuff later
 
 e.g.
-forward time multiline:     				reverse version should be
-line 1: 0 1 1							          1 1 0
-line 2: 0 0 1							          1 0 0
-line 3: 0 0 0							          0 0 0
+
+forward time multiline:
+
+line 1: 0 1 1
+
+line 2: 0 0 1
+
+line 3: 0 0 0
+
+reversed time should be:
+line 1: 1 1 0
+line 2: 1 0 0
+line 3: 0 0 0
+
 
 # Rate of KL divergence between two machines M1 and M2
 This is denoted D(M1||M2).
