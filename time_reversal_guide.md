@@ -1,4 +1,4 @@
-# brain_machine
+# mini_guide
 Time reversal related code 
 
 Forward-time e-machine is M+ with statistical complexity Cmu+
